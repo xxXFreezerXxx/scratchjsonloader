@@ -1,0 +1,24 @@
+{
+  "name": "scratchjsonloader",
+  "version": "1.0.0",
+  "description": "sb3ファイルから簡単にJSONファイルを簡単に取得できます。",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxXFreezerXxx/scratchjsonloader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xxXFreezerXxx/scratchjsonloader/issues"
+  },
+  "homepage": "https://github.com/xxXFreezerXxx/scratchjsonloader#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
