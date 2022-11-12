@@ -4,17 +4,26 @@ let zip = new JSZip();;
 $('#load-btn').click(function() {
   projectId = $('#project-id').val();
   $('#load-btn').text('LOADING...');
-  fetch(`https://projects.scratch.mit.edu/${projectId}`)
-  .then(res=>res.json()).then(res=>{
-    $('#json-editor').val(res);
-    $('#json-editor').removeAttr('disabled');
-    $('#load-btn').text('LOAD');
-    $('#thumbnail').attr('src', `https://uploads.scratch.mit.edu/projects/thumbnails/${projectId}.png`);
-  })
-  .catch(()=>{
+  fetch("/token",{
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({id:projectId}),
+}).then(res=>res.text()).then(async res=>{
+  if(res!="error"){ 
+    fetch(`https://projects.scratch.mit.edu/${projectId}?token=${res}`)
+    .then(res=>res.json()).then(res=>JSON.stringify(res)).then(res=>{
+      $('#json-editor').val(res);
+      $('#json-editor').removeAttr('disabled');
+      $('#load-btn').text('LOAD');
+      $('#thumbnail').attr('src', `https://uploads.scratch.mit.edu/projects/thumbnails/${projectId}.png`);
+  })}else{
     alert('エラーが発生しました。\nThe error occurred.')
     $('#load-btn').text('LOAD');
-  })
+  }
+})
 });
 
 $('#export').click(function () {
